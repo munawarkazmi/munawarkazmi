@@ -28,6 +28,7 @@ is either validated on real robots or running in production for real users. Noth
 
 | Project | What it is |
 | --- | --- |
+| [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with 529 label proofs re-run in CI, a semantically obfuscated condition, and no human or LLM judging anywhere. Results for three models committed as replayable records; working paper in progress. |
 | [ROS2 Dynamic Path Planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning) | C++20 Global Planner plugin for ROS2 Nav2 (A* and D* Lite), validated on TurtleBot3 with protective-stop safety guarantees. 22% faster replanning, 24% shorter travel times. |
 | [ROS2 LLM Safety Verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier) | Real-time hallucination detector that intercepts unsafe LLM-generated trajectories before they reach robot hardware. 94% catch rate at under 50 ms on Jetson Orin Nano. |
 | [ESP32-CAM Motion Detector](https://github.com/munawarkazmi/esp32-cam-motion-detector) | Deterministic C++ firmware with a LoRa mesh alert protocol, shipped as a deployed safety-critical product. 93.8% detection accuracy on a 60% RAM budget. |
