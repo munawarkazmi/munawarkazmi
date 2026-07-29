@@ -16,9 +16,9 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 ## Proof, not promises
 
-| 4.3x | 35/35 | 0 | 529 | 7 |
+| 4.3x | 35/35 | 0 | 548 | 7 |
 | :---: | :---: | :---: | :---: | :---: |
-| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B trajectories caught by my safety verifier | missed dangers across 2,111 oracle-checked evaluation cases | ground-truth label proofs re-run in CI in my LLM-planner benchmark | user roles served daily by my production school platform |
+| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B trajectories caught by my safety verifier | missed dangers across 2,111 oracle-checked evaluation cases | CI-enforced tests behind my LLM-planner benchmark, differential-tested against pyperplan | user roles served daily by my production school platform |
 
 My work sits where autonomy meets responsibility: human-robot interaction, sim-to-real
 transfer, and keeping learned systems honest before they touch hardware. Every robotics
@@ -29,7 +29,7 @@ the repo, run one command, get the same number. The products are in production f
 
 | Project | What it is |
 | --- | --- |
-| [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with 529 label proofs re-run in CI, a semantically obfuscated condition, and no human or LLM judging anywhere. Results for three models committed as replayable records; working paper in progress. |
+| [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with a 548-test suite re-run in CI (the count itself is CI-asserted), a semantically obfuscated condition, and no human or LLM judging anywhere. Results for three models committed as replayable records; working paper in progress. |
 | [ROS2 Dynamic Path Planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning) | A* and D* Lite as Nav2 plugins over a ROS-free C++20 core, validated against Dijkstra ground truth (185k fuzzed replans, exact equality). In a fair, seeded 200-trial benchmark on a real building map, D* Lite replans 4.3x faster on average (11x median) - full per-event data committed, re-run in CI. |
 | [ROS2 LLM Safety Verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier) | Deterministic safety gate between LLM planners and Nav2. Against real model output, qwen2.5-7B proposed unsafe trajectories in 35 of 40 scenarios - the verifier caught all 35 with zero misses and zero false positives, at microsecond latency. Prompts, raw responses, and the evaluator are committed; CI replays the whole dataset. |
 | [ESP32-CAM Motion Detector](https://github.com/munawarkazmi/esp32-cam-motion-detector) | Deterministic motion-detection firmware from a commercial prototype (Muxtronics 2025): block-difference detection, no ML, no vision libraries, CI-compiled for the target board on every push. Demo video and signed academic reference included; claims nothing it cannot back. |
