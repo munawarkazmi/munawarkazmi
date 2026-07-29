@@ -18,7 +18,7 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 | 4.3x | 35/35 | 0 | 548 | 7 |
 | :---: | :---: | :---: | :---: | :---: |
-| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B trajectories caught by my safety verifier | missed dangers across 2,111 oracle-checked evaluation cases | CI-enforced tests behind my LLM-planner benchmark, differential-tested against pyperplan | user roles served daily by my production school platform |
+| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B trajectories caught by my safety verifier | missed dangers - 2,071 constructed + 40 real-model verifier cases, each count CI-enforced | CI-enforced tests behind my LLM-planner benchmark, differential-tested against pyperplan | user roles served daily by my production school platform |
 
 My work sits where autonomy meets responsibility: human-robot interaction, sim-to-real
 transfer, and keeping learned systems honest before they touch hardware. Every robotics
