@@ -9,6 +9,7 @@
 MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 [![Portfolio](https://img.shields.io/badge/munawarkazmi.com-visit_my_portfolio-0f2f52?style=for-the-badge)](https://munawarkazmi.com)
+[![Preprint](https://img.shields.io/badge/preprint-10.5281%2Fzenodo.21756817-b08d3f?style=for-the-badge)](https://doi.org/10.5281/zenodo.21756817)
 
 </div>
 
@@ -31,7 +32,7 @@ the repo, run one command, get the same number. The products are in production f
 | --- | --- |
 | [llm-nav-shield](https://github.com/munawarkazmi/llm-nav-shield) | The keystone: an LLM proposes a trajectory, my verifier checks it, my planning core recovers a provably-safe path when it fails, and the system halts when no safe path exists. Composition of the two verified cores below as pinned submodules. Replaying 40 committed qwen2.5-7B proposals: 38/38 flawed plans recovered, 0 unsafe forwarded, 10/10 sealed-goal cases halted - all CI-enforced. |
 | [toolcall-contract](https://github.com/munawarkazmi/toolcall-contract) | The shield's architecture pointed at agent frameworks: a deterministic two-layer validator for LLM tool calls. Stdlib structural checker in 25,000-case differential agreement with pinned jsonschema, plus the semantic contract layer where failures actually live - on the same 40 committed tasks, qwen2.5-7B broke 0 schemas and 7 contracts, llama-3.3-70B 0 and 5; CI replays both datasets. |
-| [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with a 548-test suite re-run in CI (the count itself is CI-asserted), a semantically obfuscated condition, and no human or LLM judging anywhere. Results for four models - a local 7B through a frontier reasoning model - committed as replayable records; working paper in progress. |
+| [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with a 548-test suite re-run in CI (the count itself is CI-asserted), a semantically obfuscated condition, and no human or LLM judging anywhere. The fixed-prompt grid is complete at 18 committed runs over four models: a frontier reasoning model repeats every headline count under full semantic obfuscation on both environments, 13 of 13 traps with 0 false positives, while smaller models split between never refusing at all and refusing on surface semantics alone. Published as a citable preprint, [DOI 10.5281/zenodo.21756817](https://doi.org/10.5281/zenodo.21756817), with every citation checked against the cited paper's body and the record of those checks published as an appendix. |
 | [ROS2 Dynamic Path Planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning) | A* and D* Lite as Nav2 plugins over a ROS-free C++20 core, validated against Dijkstra ground truth (185k fuzzed replans, exact equality). In a fair, seeded 200-trial benchmark on a real building map, D* Lite replans 4.3x faster on average (11x median) - full per-event data committed, re-run in CI. |
 | [exact-predicates](https://github.com/munawarkazmi/exact-predicates) | Geometric predicates that cannot be wrong, grown from the D* Lite key-tie bug: exact integer arithmetic under code-enforced bounds, an unbounded big-integer oracle, and 657 committed adversarial cases where CI asserts the float version is wrong AND the exact one is right - every case, every push. Exactness costs ~2x, measured. |
 | [ROS2 LLM Safety Verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier) | Deterministic safety gate between LLM planners and Nav2. Against real model output over the same 40 scenarios: qwen2.5-7B proposed unsafe trajectories in 35, llama-3.3-70B in 32 - the verifier caught every one, zero misses and zero false positives for both, at microsecond latency. The 70B model hit every endpoint and still drove through obstacles: unsafe-but-on-target, the exact failure a runtime gate exists for. Prompts, raw responses, and the evaluator are committed; CI replays both datasets. |
@@ -70,7 +71,7 @@ the repo, run one command, get the same number. The products are in production f
 
 ## Currently
 
-- Extending safety verification for learned planners in ROS2
+- Extending the benchmark's k=5 sampling protocol to the remaining grid cells, the single change that would most strengthen its claims
 - Running and evolving a production school platform serving students, teachers, and staff daily
 - **Open to research collaborations and PhD opportunities** in robotics and trustworthy AI
 
