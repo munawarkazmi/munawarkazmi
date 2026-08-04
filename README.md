@@ -17,9 +17,9 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 ## Proof, not promises
 
-| 4.3x | 35/35 · 32/32 | 0 | 548 | 7 |
-| :---: | :---: | :---: | :---: | :---: |
-| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B and llama-3.3-70B trajectories caught by my safety verifier, per model | missed dangers - 2,071 constructed + 80 real-model verifier cases, each count CI-enforced | CI-enforced tests behind my LLM-planner benchmark, differential-tested against pyperplan | user roles served daily by my production school platform |
+| 4.3x | 35/35 · 32/32 | 0 | 80/80 | 548 | 7 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| faster replanning, D* Lite vs A*, seeded 200-trial benchmark | unsafe qwen2.5-7B and llama-3.3-70B trajectories caught by my safety verifier, per model | missed dangers - 2,071 constructed + 80 real-model verifier cases, each count CI-enforced | decodes in which a model called its own trajectory legible, two models over eight worlds - 25 of those trajectories were not physically possible | CI-enforced tests behind my LLM-planner benchmark, differential-tested against pyperplan | user roles served daily by my production school platform |
 
 My work sits where autonomy meets responsibility: human-robot interaction, sim-to-real
 transfer, and keeping learned systems honest before they touch hardware. Every robotics
@@ -32,6 +32,7 @@ the repo, run one command, get the same number. The products are in production f
 | --- | --- |
 | [llm-nav-shield](https://github.com/munawarkazmi/llm-nav-shield) | The keystone: an LLM proposes a trajectory, my verifier checks it, my planning core recovers a provably-safe path when it fails, and the system halts when no safe path exists. Composition of the two verified cores below as pinned submodules. Replaying 40 committed qwen2.5-7B proposals: 38/38 flawed plans recovered, 0 unsafe forwarded, 10/10 sealed-goal cases halted - all CI-enforced. |
 | [toolcall-contract](https://github.com/munawarkazmi/toolcall-contract) | The shield's architecture pointed at agent frameworks: a deterministic two-layer validator for LLM tool calls. Stdlib structural checker in 25,000-case differential agreement with pinned jsonschema, plus the semantic contract layer where failures actually live - on the same 40 committed tasks, qwen2.5-7B broke 0 schemas and 7 contracts, llama-3.3-70B 0 and 5; CI replays both datasets. |
+| [legible-motion-bench](https://github.com/munawarkazmi/legible-motion-bench) | Robots that pay path cost to make their destination obvious, and what that costs them in safety. Legibility is Dragan's, not mine; what this measures is the three-way trade between clarity, path cost and constraint satisfaction, exactly and with no human or model judging. Eight worlds, each carrying machine-checked facts about its own geometry, 235 CI-enforced tests, exact optimal cost-to-go over a visibility graph with a guarded predicate that matches rational arithmetic on 20,000 near-collinear cases where plain floating point gets the sign wrong. Asked to be legible under a stated path budget, two models called all 80 of their trajectories legible; 25 of those were not physically possible, and in the world built so that clarity and the keep-out zone conflict, both models bought the clarity and entered the zone on every one of ten samples. Given four different budgets, the smaller model's median path cost moved by 0.012. |
 | [plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench) | Research benchmark measuring how LLM planners fail at robot tasks, not just how often: 60 trap-labelled instructions over two symbolic environments, ground truth decidable end to end with a 548-test suite re-run in CI (the count itself is CI-asserted), a semantically obfuscated condition, and no human or LLM judging anywhere. The fixed-prompt grid is complete at 18 committed runs over four models: a frontier reasoning model repeats every headline count under full semantic obfuscation on both environments, 13 of 13 traps with 0 false positives, while smaller models split between never refusing at all and refusing on surface semantics alone. Published as a citable preprint, [DOI 10.5281/zenodo.21756817](https://doi.org/10.5281/zenodo.21756817), with every citation checked against the cited paper's body and the record of those checks published as an appendix. |
 | [ROS2 Dynamic Path Planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning) | A* and D* Lite as Nav2 plugins over a ROS-free C++20 core, validated against Dijkstra ground truth (185k fuzzed replans, exact equality). In a fair, seeded 200-trial benchmark on a real building map, D* Lite replans 4.3x faster on average (11x median) - full per-event data committed, re-run in CI. |
 | [exact-predicates](https://github.com/munawarkazmi/exact-predicates) | Geometric predicates that cannot be wrong, grown from the D* Lite key-tie bug: exact integer arithmetic under code-enforced bounds, an unbounded big-integer oracle, and 657 committed adversarial cases where CI asserts the float version is wrong AND the exact one is right - every case, every push. Exactness costs ~2x, measured. |
@@ -71,7 +72,8 @@ the repo, run one command, get the same number. The products are in production f
 
 ## Currently
 
-- Extending the benchmark's k=5 sampling protocol to the remaining grid cells, the single change that would most strengthen its claims
+- Building legible-motion-bench, measuring what a robot gives up in safety when it moves to make its destination obvious, and whether language models can do it when asked
+- Extending plan-failure-bench's k=5 sampling protocol to the remaining grid cells, the single change that would most strengthen its claims
 - Running and evolving a production school platform serving students, teachers, and staff daily
 - **Open to research collaborations and PhD opportunities** in robotics and trustworthy AI
 
