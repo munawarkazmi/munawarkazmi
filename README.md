@@ -4,12 +4,13 @@
 
 ### Robotics & AI Research Engineer
 
-**Keeping learned systems honest before they reach hardware.**
+**Teaching robots to say *what they mean*, and to know *when they can't*.**
 
 MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 [![Portfolio](https://img.shields.io/badge/munawarkazmi.com-visit_my_portfolio-0f2f52?style=for-the-badge)](https://munawarkazmi.com)
-[![Preprint](https://img.shields.io/badge/preprint-10.5281%2Fzenodo.21756817-b08d3f?style=for-the-badge)](https://doi.org/10.5281/zenodo.21756817)
+[![RA-L submission](https://img.shields.io/badge/RA--L_submission-legibility--bounds-b08d3f?style=for-the-badge)](https://doi.org/10.5281/zenodo.21834955)
+[![Preprint](https://img.shields.io/badge/preprint-plan--failure--bench-b08d3f?style=for-the-badge)](https://doi.org/10.5281/zenodo.21756817)
 
 </div>
 
@@ -23,10 +24,11 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 push. When the evidence behind an earlier claim was lost, the claim was withdrawn rather than restated
 on trust, and the withdrawal stays published beside it.
 
-## Between a language model and a robot
+## Knowing when they can't
 
-Not four projects but one line of work: measure how models fail, catch it, compute a correct
-alternative, then decide between fixing the plan and stopping.
+Language models are being handed control of things that move. These are one line of work rather than
+separate projects: measure how the models fail, catch it, compute a correct alternative, then decide
+between fixing the plan and stopping.
 
 - **[plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench):** how LLM planners fail at robot tasks, not just how often. 60 trap-labelled instructions, ground truth decidable end to end, no human or model judging anywhere, 548 proofs re-run in CI. [Preprint](https://doi.org/10.5281/zenodo.21756817).
 - **[ros2-llm-safety-verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier):** a deterministic gate between the model and Nav2. 35/35 unsafe qwen2.5-7B and 32/32 unsafe llama-3.3-70B trajectories caught, zero misses, zero false positives, microsecond latency.
@@ -34,12 +36,12 @@ alternative, then decide between fixing the plan and stopping.
 - **[llm-nav-shield](https://github.com/munawarkazmi/llm-nav-shield):** the three composed into verify, recover, or halt when nothing safe exists. 38/38 flawed plans recovered, 0 unsafe forwarded, then replayed on three public ROS bags where real costmaps break assumptions the synthetic ones never could.
 - **[toolcall-contract](https://github.com/munawarkazmi/toolcall-contract):** the same question away from robots. Two layers for LLM tool calls, where the semantic layer catches 7 contract breaks that the schema layer scores as clean.
 
-## Motion that explains itself
+## Saying what they mean
 
 A robot that signals where it is going is easier to work beside, and that clarity is not free. One
 project bounds it, the other prices it.
 
-- **[legibility-bounds](https://github.com/munawarkazmi/legibility-bounds):** certified two-sided bounds on how legible a trajectory can be under a path budget, quantified over every admissible trajectory rather than the ones somebody searched. 32 world-ceiling pairs, 0 violations. RA-L draft in `paper/`.
+- **[legibility-bounds](https://github.com/munawarkazmi/legibility-bounds):** certified two-sided bounds on how legible a trajectory can be under a path budget, quantified over every admissible trajectory rather than the ones somebody searched. 32 world-ceiling pairs, 0 violations. Submitted to IEEE RA-L, [preprint](https://doi.org/10.5281/zenodo.21834955).
 - **[legible-motion-bench](https://github.com/munawarkazmi/legible-motion-bench):** what that clarity costs in safety and path length, measured with no judging anywhere. Two models called all 80 of their trajectories legible; 25 of those were not physically possible.
 
 ## Foundations, and things already running
@@ -51,13 +53,32 @@ project bounds it, the other prices it.
 
 ## Toolbox
 
-C++20, Python, ROS 2 and Nav2, Docker, Git and CI. TensorRT, Jetson Nano and Orin, ESP32, LoRa mesh.
-React, TypeScript, PostgreSQL with row-level security, Supabase.
+**Robotics and systems**
+
+![C++](https://img.shields.io/badge/C++20-00599C?style=flat-square&logo=cplusplus&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![ROS2](https://img.shields.io/badge/ROS2_Nav2-22314E?style=flat-square&logo=ros&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/Git_&_CI/CD-F05032?style=flat-square&logo=git&logoColor=white)
+
+**Edge AI and embedded**
+
+![TensorRT](https://img.shields.io/badge/TensorRT-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![Jetson](https://img.shields.io/badge/Jetson_Nano_/_Orin-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![ESP32](https://img.shields.io/badge/ESP32-E7352C?style=flat-square&logo=espressif&logoColor=white)
+![LoRa](https://img.shields.io/badge/LoRa_Mesh-2C3E50?style=flat-square)
+
+**Full-stack**
+
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL_+_RLS-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
 
 ## Currently
 
 - Extending plan-failure-bench's k=5 sampling to the remaining grid cells, the single change that would most strengthen its claims
-- Preparing the legibility-bounds RA-L draft for submission
+- Carrying the legibility-bounds submission through RA-L review
 - Running a production school platform used daily by students, teachers and staff
 - **Open to research collaborations and PhD opportunities** in robotics and trustworthy AI
 
