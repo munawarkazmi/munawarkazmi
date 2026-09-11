@@ -20,29 +20,51 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 | :---: | :---: | :---: |
 | faster replanning<br>D* Lite vs A*, 200 seeded trials | unsafe trajectories missed<br>by my LLM safety verifier | certified legibility bounds holding<br>every world, every budget |
 
-**Every number here is checkable.** Each is produced by committed code and re-verified in CI on every
-push. When the evidence behind an earlier claim was lost, the claim was withdrawn rather than restated
-on trust, and the withdrawal stays published beside it.
-
-## Knowing when they can't
-
-Language models are being handed control of things that move. These are one line of work rather than
-separate projects: measure how the models fail, catch it, compute a correct alternative, then decide
-between fixing the plan and stopping.
-
-- **[plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench):** how LLM planners fail at robot tasks, not just how often. 60 trap-labelled instructions, ground truth decidable end to end, no human or model judging anywhere, 548 proofs re-run in CI. [Preprint](https://doi.org/10.5281/zenodo.21756817).
-- **[ros2-llm-safety-verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier):** a deterministic gate between the model and Nav2. 35/35 unsafe qwen2.5-7B and 32/32 unsafe llama-3.3-70B trajectories caught, zero misses, zero false positives, microsecond latency.
-- **[ros2-dynamic-path-planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning):** A* and D* Lite as Nav2 plugins over a ROS-free C++20 core. 4.3x faster replans on average, validated against Dijkstra across 185,237 fuzzed cases.
-- **[llm-nav-shield](https://github.com/munawarkazmi/llm-nav-shield):** the three composed into verify, recover, or halt when nothing safe exists. 38/38 flawed plans recovered, 0 unsafe forwarded, then replayed on three public ROS bags where real costmaps break assumptions the synthetic ones never could.
-- **[toolcall-contract](https://github.com/munawarkazmi/toolcall-contract):** the same question away from robots. Two layers for LLM tool calls, where the semantic layer catches 7 contract breaks that the schema layer scores as clean.
+**Every number here is checkable** — produced by committed code, re-verified in CI on every push.
+**One of them was withdrawn.** When the evidence behind an earlier claim was lost, the claim came down
+rather than being restated on trust, and the withdrawal is still published beside it.
 
 ## Saying what they mean
 
 A robot that signals where it is going is easier to work beside, and that clarity is not free. One
 project bounds it, the other prices it.
 
+<img src="https://raw.githubusercontent.com/munawarkazmi/legible-motion-bench/main/docs/img/pillar_aisle.gif" alt="Four planners crossing a room towards one of two goals, an observer's belief in each goal updating beneath each panel. The shortest path clips the keep-out zone; each legible one avoids it and arrives later.">
+
+<sub>The cheapest route clips the keep-out zone. Every legible one avoids it, and pays for the clarity
+in arrival time — all four on one clock, so the one that paid is seen arriving last. Rendered from
+committed scenarios by the benchmark's own tool.</sub>
+
 - **[legibility-bounds](https://github.com/munawarkazmi/legibility-bounds):** certified two-sided bounds on how legible a trajectory can be under a path budget, quantified over every admissible trajectory rather than the ones somebody searched. 32 world-ceiling pairs, 0 violations. Submitted to IEEE RA-L, [preprint](https://doi.org/10.5281/zenodo.21834955).
-- **[legible-motion-bench](https://github.com/munawarkazmi/legible-motion-bench):** what that clarity costs in safety and path length, measured with no judging anywhere. Two models called all 80 of their trajectories legible; 25 of those were not physically possible.
+- **[legible-motion-bench](https://github.com/munawarkazmi/legible-motion-bench):** two models called all 80 of their trajectories legible. 25 were not physically possible. What clarity costs in safety and path length, measured with no judging anywhere.
+
+## Knowing when they can't
+
+Language models are being handed control of things that move. One line of work, not five projects:
+measure how the models fail, catch it, compute a correct alternative, then choose between fixing the
+plan and stopping.
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/munawarkazmi/ros2-dynamic-path-planning/main/docs/figures/replan.gif" width="380" alt="A robot following a planned route across an indoor floor plan. An obstacle appears across the route, and D* Lite repairs the journey to the same goal around it.">
+
+<sub>A real run on the repository's occupancy map. A* expands 125,760 nodes for the first plan;<br/>
+D* Lite repairs it around the new obstacle by expanding 256.</sub>
+
+</div>
+
+```mermaid
+flowchart LR
+    A["plan-failure-bench<br/><i>measure how they fail</i>"] --> B["ros2-llm-safety-verifier<br/><i>catch it</i>"]
+    B --> C["ros2-dynamic-path-planning<br/><i>compute a safe alternative</i>"]
+    C --> D["llm-nav-shield<br/><i>fix the plan, or halt</i>"]
+```
+
+- **[plan-failure-bench](https://github.com/munawarkazmi/plan-failure-bench):** how LLM planners fail at robot tasks, not just how often. 60 trap-labelled instructions, ground truth decidable end to end, no human or model judging anywhere, 548 proofs re-run in CI. [Preprint](https://doi.org/10.5281/zenodo.21756817).
+- **[ros2-llm-safety-verifier](https://github.com/munawarkazmi/ros2-llm-safety-verifier):** zero misses, zero false positives. A deterministic gate between the model and Nav2 at microsecond latency, catching 35/35 unsafe qwen2.5-7B and 32/32 unsafe llama-3.3-70B trajectories.
+- **[ros2-dynamic-path-planning](https://github.com/munawarkazmi/ros2-dynamic-path-planning):** A* and D* Lite as Nav2 plugins over a ROS-free C++20 core. 4.3x faster replans on average, validated against Dijkstra across 185,237 fuzzed cases.
+- **[llm-nav-shield](https://github.com/munawarkazmi/llm-nav-shield):** the three composed into verify, recover, or halt when nothing safe exists. 38/38 flawed plans recovered, 0 unsafe forwarded, then replayed on three public ROS bags where real costmaps break assumptions the synthetic ones never could.
+- **[toolcall-contract](https://github.com/munawarkazmi/toolcall-contract):** the same question away from robots. Two layers for LLM tool calls, where the semantic layer catches 7 contract breaks that the schema layer scores as clean.
 
 ## Foundations, and things already running
 
@@ -52,6 +74,11 @@ project bounds it, the other prices it.
 - **[esp32-cam-motion-detector](https://github.com/munawarkazmi/esp32-cam-motion-detector):** deterministic motion-detection firmware from a commercial prototype. No ML, no vision libraries, compiled for the target board in CI on every push.
 
 ## Toolbox
+
+<details>
+<summary>Robotics and systems, edge AI and embedded, full-stack — click to open</summary>
+
+<br/>
 
 **Robotics and systems**
 
@@ -74,6 +101,8 @@ project bounds it, the other prices it.
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL_+_RLS-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
+
+</details>
 
 ## Currently
 
