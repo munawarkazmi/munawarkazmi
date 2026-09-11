@@ -16,11 +16,15 @@ MSc AI & Robotics (Commendation) · University of Hertfordshire
 
 ---
 
+<div align="center">
+
 | **4.3x** | **0 / 2,151** | **32 / 32** |
 | :---: | :---: | :---: |
 | faster replanning<br>D* Lite vs A*, 200 seeded trials | unsafe trajectories missed<br>by my LLM safety verifier | certified legibility bounds holding<br>every world, every budget |
 
-**Every number here is checkable** — produced by committed code, re-verified in CI on every push.
+</div>
+
+**Every number here is checkable.** Each is produced by committed code and re-verified in CI on every push.
 **One of them was withdrawn.** When the evidence behind an earlier claim was lost, the claim came down
 rather than being restated on trust, and the withdrawal is still published beside it.
 
@@ -29,11 +33,15 @@ rather than being restated on trust, and the withdrawal is still published besid
 A robot that signals where it is going is easier to work beside, and that clarity is not free. One
 project bounds it, the other prices it.
 
+<div align="center">
+
 <img src="https://raw.githubusercontent.com/munawarkazmi/legible-motion-bench/main/docs/img/pillar_aisle.gif" alt="Four planners crossing a room towards one of two goals, an observer's belief in each goal updating beneath each panel. The shortest path clips the keep-out zone; each legible one avoids it and arrives later.">
 
 <sub>The cheapest route clips the keep-out zone. Every legible one avoids it, and pays for the clarity
-in arrival time — all four on one clock, so the one that paid is seen arriving last. Rendered from
+in arrival time. All four are on one clock, so the one that paid is seen arriving last. Rendered from
 committed scenarios by the benchmark's own tool.</sub>
+
+</div>
 
 - **[legibility-bounds](https://github.com/munawarkazmi/legibility-bounds):** certified two-sided bounds on how legible a trajectory can be under a path budget, quantified over every admissible trajectory rather than the ones somebody searched. 32 world-ceiling pairs, 0 violations. Submitted to IEEE RA-L, [preprint](https://doi.org/10.5281/zenodo.21834955).
 - **[legible-motion-bench](https://github.com/munawarkazmi/legible-motion-bench):** two models called all 80 of their trajectories legible. 25 were not physically possible. What clarity costs in safety and path length, measured with no judging anywhere.
@@ -76,7 +84,7 @@ flowchart LR
 ## Toolbox
 
 <details>
-<summary>Robotics and systems, edge AI and embedded, full-stack — click to open</summary>
+<summary>Robotics and systems, edge AI and embedded, full-stack</summary>
 
 <br/>
 
